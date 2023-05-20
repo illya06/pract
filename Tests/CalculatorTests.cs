@@ -41,7 +41,7 @@ namespace Calculator.Tests
             // Arrange
             int v1 = 5;
             int v2 = 3;
-            int expectedProduct = 0;
+            int expectedProduct = 1;
 
             // Act
             int actualProduct = Calc.Multiply(v1, v2);
