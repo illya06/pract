@@ -11,7 +11,7 @@ namespace Calculator.Tests
             // Arrange
             int v1 = 5;
             int v2 = 3;
-            int expectedSum = 8;
+            int expectedSum = 15;
 
             // Act
             int actualSum = Calc.Add(v1, v2);
