@@ -22,12 +22,12 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run:  |
+        cd Calc &&
+        dotnet restore
 
     - name: Build
-      run: |
-        cd Calc &&
-        dotnet build --configuration Release --no-restore 
+      run: dotnet build --configuration Release --no-restore 
 
   test:
     runs-on: ubuntu-latest
@@ -45,12 +45,12 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run:  |
+        cd Calc &&
+        dotnet restore
 
     - name: Debug
       run: ls
 
     - name: Test
-      run: |
-        cd Tests &&
-        dotnet test --configuration Release
+      run: dotnet test --configuration Release
