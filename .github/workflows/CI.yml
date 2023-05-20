@@ -1,46 +1,48 @@
-name: .NET CI
+name: CI
 
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - main  # Change this to the branch you want to trigger the workflow on
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x'
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.x  # Change this to your desired .NET version
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-  test:
-    runs-on: ubuntu-latest
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+# Branch protection rules
+# Replace "main" with your desired branch name
+# This example assumes you have a single protected branch
+# If you have multiple protected branches, repeat the following configuration for each branch
+# For more details, refer to the GitHub Actions documentation on branch protection
+branch-protection:
+  pull-request:
+    types:
+      - synchronize
+    branches:
+      - main:
+          - ci
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x'
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+# Status checks
+# Replace "main" with your desired branch name
+# Replace "CI" with the name of the workflow defined above (name field under "jobs")
+status-checks:
+  required-checks:
+    - CI
