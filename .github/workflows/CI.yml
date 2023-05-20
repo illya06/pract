@@ -3,7 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - master  # Change this to the branch you want to trigger the workflow on
+  pull_request:
+    branches:
+      - master  # Change this to the branch you want to trigger the workflow on
 
 jobs:
   build:
@@ -16,7 +19,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.x
+          dotnet-version: 6.x  # Change this to your desired .NET version
 
       - name: Restore dependencies
         run: dotnet restore
