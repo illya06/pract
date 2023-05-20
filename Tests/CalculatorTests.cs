@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using Pract;
 
-namespace Calculator.Tests
+namespace Tests
 {
     [TestFixture]
     public class CalculatorTests
@@ -11,7 +12,7 @@ namespace Calculator.Tests
             // Arrange
             int v1 = 5;
             int v2 = 3;
-            int expectedSum = 15;
+            int expectedSum = 8;
 
             // Act
             int actualSum = Calc.Add(v1, v2);
@@ -41,7 +42,7 @@ namespace Calculator.Tests
             // Arrange
             int v1 = 5;
             int v2 = 3;
-            int expectedProduct = 1;
+            int expectedProduct = 15;
 
             // Act
             int actualProduct = Calc.Multiply(v1, v2);

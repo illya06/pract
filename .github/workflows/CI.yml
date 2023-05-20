@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Calc
 
     steps:
     - name: Checkout repository
@@ -25,10 +28,14 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore 
 
   test:
+    needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Tests
 
     steps:
     - name: Checkout repository
@@ -42,11 +49,5 @@ jobs:
       with:
         dotnet-version: '6.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Debug
-      run: ls
-
     - name: Test
-      run: dotnet test --configuration Release
+      run: dotnet test --configuration Release --verbosity normal
